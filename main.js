@@ -34,7 +34,7 @@ process.handleMessage = async function handleMessage(msg, client) {
             return;
         }
 
-        
+
 
         //Filter the message.
         text = text
@@ -50,7 +50,7 @@ process.handleMessage = async function handleMessage(msg, client) {
                 sender: sender,
                 obj: msg
             }
-            
+
             if (
                 //Create an user if they don't have an account already.
                 //If they didn't have an account, and create returned true...
@@ -59,7 +59,7 @@ process.handleMessage = async function handleMessage(msg, client) {
                 (await process.core.users.getNotify(sender, client))
             ) {
                 //Give them the notified warning.
-                process.core.router.pm(client, `Hi! :raised_hand:\r\nI'm **`+process.settings[client].name+`**! A bot created by **turinglabs** at your service! :robot:\r\nYou can use me for **`+process.settings.coin.symbol+`** deposit, send and tip!\r\nThe command you just gave me was used to create your account! To know the list of commands, you can type\r\n\`\`\`*help\`\`\`\r\nEvery transaction you make through me, will be written directly inside the `+process.settings.coin.name+` blockchain, so you can check your operations using our BlockExplorer!\r\n\r\n**DISCLAIMER**:\r\n*By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and turinglabs or the server's owners from any legal liability.*
+                process.core.router.pm(client, `Hi! :raised_hand:\r\nI'm **`+process.settings[client].name+`**! A bot operated by **SpaceWorks** at your service! :robot:\r\nYou can use me for **`+process.settings.coin.symbol+`** deposit, send and tip!\r\nThe command you just gave me was used to create your account! To know the list of commands, you can type\r\n\`\`\`*help\`\`\`\r\nEvery transaction you make through me, will be written directly on the `+process.settings.coin.name+` blockchain, so you can check your operations using a block explorer!\r\n\r\n**DISCLAIMER**:\r\n*By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and SpaceWorks or the server's owners from any legal liability.*
                 `, msgObj);
                 //Mark them as notified.
                 await process.core.users.setNotified(sender, client);
@@ -102,7 +102,7 @@ async function main() {
     process.core.router = await (require("./core/router.js"))();
     //Require and init the requests lib.
     process.core.requests = await (require("./core/requests.js"))();
-    
+
     process.core.requests.check()
 
     //Run discord bot
