@@ -40,7 +40,7 @@ module.exports = async (client, msg) => {
         var count = 0
         if(client === 'discord'){
             process.client.discord.users.map(user => {
-                if(user.bot === false && user.id !== from && user.presence.status == "online"){
+                if(user.bot === false && user.id !== from && user.presence.status !== "offline"){
                     if(rainusersid.indexOf(user.id) === -1 && count < max){
                         rainusers.push(user)
                         rainusersid.push(user.id)
