@@ -35,12 +35,12 @@ module.exports = async (client, msg) => {
             return;
         }
 
-        var rainusers = [] 
-        var rainusersid = [] 
+        var rainusers = []
+        var rainusersid = []
         var count = 0
         if(client === 'discord'){
             process.client.discord.users.map(user => {
-                if(user.bot === false && user.id !== from){
+                if(user.bot === false && user.id !== from && user.presence.status == "online"){
                     if(rainusersid.indexOf(user.id) === -1 && count < max){
                         rainusers.push(user)
                         rainusersid.push(user.id)
@@ -54,7 +54,7 @@ module.exports = async (client, msg) => {
             var amountperuser = (amountavailable / rainusers.length).toFixed(process.settings.coin.decimals)
             var sender = await process.core.users.findUser(from, client)
             var tagusers = []
-            var x=0 
+            var x=0
             for(let u in rainusers){
                 let to = rainusers[u].id
                 if(!tagusers[x]){
