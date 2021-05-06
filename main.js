@@ -59,7 +59,7 @@ process.handleMessage = async function handleMessage(msg, client) {
                 (await process.core.users.getNotify(sender, client))
             ) {
                 //Give them the notified warning.
-                process.core.router.pm(client, `Hi! :raised_hand:\r\nI'm **`+process.settings[client].name+`**! A bot operated by **SpaceWorks** at your service! :robot:\r\nYou can use me for **`+process.settings.coin.symbol+`** deposit, send and tip!\r\nThe command you just gave me was used to create your account! To know the list of commands, you can type\r\n\`\`\`*help\`\`\`\r\nEvery transaction you make through me, will be written directly on the `+process.settings.coin.name+` blockchain, so you can check your operations using a block explorer!\r\n\r\n**DISCLAIMER**:\r\n*By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and SpaceWorks or the server's owners from any legal liability.*
+                process.core.router.pm(client, `Hi! :raised_hand:\r\nI'm **`+process.settings[client].name+`**! a bot operated by **SpaceWorks** at your service! :robot:\r\nYou can use me for **`+process.settings.coin.symbol+`** tipping!\r\nThe command you just gave me was used to create your account! To know the list of commands, you can type\r\n\`\`\`*help\`\`\`\r\nEvery transaction you make is sent on the `+process.settings.coin.name+` blockchain, so you can check your operations using a block explorer!\r\n\r\n**DISCLAIMER**:\r\n*By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and SpaceWorks or the server's owners from any legal liability.*
                 `, msgObj);
                 //Mark them as notified.
                 await process.core.users.setNotified(sender, client);
@@ -70,7 +70,7 @@ process.handleMessage = async function handleMessage(msg, client) {
             //And this is not an approved channel...
             if (process.settings.commands[text[0]].indexOf(msg.channel.id) === -1) {
                 //Print where it can be used.
-                process.core.router.reply(client, "That command can only be run in:\r\n<#" + process.settings.commands[text[0]].join(">\r\n<#") + ">", msgObj);
+                process.core.router.reply(client, "please use the <#" + process.settings.commands[text[0]].join(">\r\n<#") + "> channel.", msgObj);
                 return;
             }
         }
@@ -80,7 +80,7 @@ process.handleMessage = async function handleMessage(msg, client) {
             return;
         }
 
-        process.core.router.reply(client, "That is not a command. Run \"" + process.settings[client].symbol + " help\" to get a list of commands or edit your last message.", msgObj);
+        process.core.router.reply(client, "I don't know that command. Use \"" + process.settings[client].symbol + " help\" to see a list of all the commands I know.", msgObj);
     }
 
 }
@@ -115,17 +115,17 @@ async function main() {
         balance:  require("./commands/balance.js"),
         dumpkey: require("./commands/dumpkey.js"),
         tip:      require("./commands/tip.js"),
-        withdraw: require("./commands/withdraw.js"),
-        request: require("./commands/request.js"),
-        rain: require("./commands/rain.js")
+        withdraw: require("./commands/withdraw.js")
+        //request: require("./commands/request.js"),
+        //rain: require("./commands/rain.js")
     };
 }
 
 (async () => {
     try {
-        console.log('Starting BOT')
+        console.log('Starting SPACE Tipbot')
         await main();
-        console.log('BOT started successfully')
+        console.log('SPACE Tipbot started successfully')
     } catch(e) {
         /*eslint no-console: ["error", {allow: ["error"]}]*/
         console.error(e);

@@ -27,10 +27,10 @@ module.exports = async (client, msg) => {
         process.core.router.reply(client, "Amount is invalid.", msg);
         return;
     }
-    
+
     amount = BN(BN(amount).toFixed(process.settings.coin.decimals));
     amountWFee = amount.plus(BN(process.settings.coin.withdrawFee));
-    
+
     //If this is not a valid user
     if (
         (
@@ -39,7 +39,7 @@ module.exports = async (client, msg) => {
             (Number.isNaN(parseInt(to.substring(2, to.length-1))))
         )
     ) {
-        process.core.router.reply(client, "You are not tipping to a valid person. Please put @ in front of their name and click the popup Discord provides.", msg);
+        process.core.router.reply(client, "You are not tipping to a valid user. Please put @ in front of their name and click the popup Discord provides.", msg);
         return;
     }
     //Strip the characters around the user ID.
@@ -70,15 +70,15 @@ module.exports = async (client, msg) => {
     var hash = await process.core.coin.send(sender.address, receiver.address, amount);
 
     if (typeof(hash) !== "string") {
-        process.core.router.reply(client, "Our node failed to create a TX! Is your address invalid?", msg);
+        process.core.router.reply(client, "I failed to create the TX. Is the address valid? Ex: RTRTspHBQfyrydPsGF95v2nHm7JBvxy2Rt", msg);
         return;
     }
 
     if (hash.length !== 64) {
-        process.core.router.reply(client, "Our node failed to create a TX! Is your address invalid?", msg);
+        process.core.router.reply(client, "I failed to create the TX. Is the address valid? Ex: RTRTspHBQfyrydPsGF95v2nHm7JBvxy2Rt", msg);
         return;
     }
 
-    process.core.router.reply(client, "Sent " + amount + " " + symbol + " to " + "<@" + to + ">" + ". TXID is " + hash, msg);
-    
+    process.core.router.reply(client, "sent " + amount + " " + symbol + " to " + "<@" + to + ">" + ". The TXID is " + hash, msg);
+
 };
